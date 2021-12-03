@@ -14,7 +14,7 @@ Encore
     // only needed for CDN's or sub-directory deploy
     // .setManifestKeyPrefix('build/')
 
-    .addEntry('app', './assets/app.js')
+    .addEntry('app', './assets/js/app.js')
     .splitEntryChunks()
     .enableSingleRuntimeChunk()
 
