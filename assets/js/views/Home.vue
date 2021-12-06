@@ -23,7 +23,7 @@
                             <div class="absolute w-4/5 h-40 bg-white text-black font-bold text-2xl -bottom-0.75 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-lg shadow-lg">
                                 <div class="flex items-center justify-between flex-wrap ">
                                     <div class="ml-6 mt-6">
-                                        <h2 class="text-4xl font-extrabold">
+                                        <h2 class="text-4xl hover:text-gray-700 font-extrabold">
                                             <router-link :to="'/restaurant/'+restaurant.id">
                                                 {{ restaurant.name }}
                                             </router-link>
@@ -60,23 +60,22 @@
 </template>
 
 <script>
-import RestaurantService from '../api/restaurants';
+import { mapState } from 'vuex';
 
 export default {
     data() {
         return {
-            restaurantList: [],
         };
     },
+    computed: mapState({
+        restaurantList: (state) => state.restaurantList,
+    }),
     created() {
         this.getRestaurantList();
     },
     methods: {
         getRestaurantList() {
-            const self = this;
-            RestaurantService.getRestaurants({ cb: (list) => {
-                self.restaurantList = list;
-            } });
+            this.$store.dispatch('getRestaurants', { cb: () => {} });
         },
         starClass(index, rating) {
             let starClass = 'fa-sm mr-1 text-lg ';

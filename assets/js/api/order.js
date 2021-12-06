@@ -5,9 +5,8 @@ export default {
         axios.post('https://comiteo-eats.victormx.com/api/orders/', payload.ordersInfos)
             .then((response) => {
                 if (payload.cb) {
-                    payload.cb(response);
+                    payload.cb(response.data.data);
                 }
             });
     },
-
 };

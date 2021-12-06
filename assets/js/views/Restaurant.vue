@@ -1,6 +1,16 @@
 <template>
     <div>
         <div v-if="restaurant.hasOwnProperty('id')">
+            <div class="m-6">
+                <button class="bg-blue-500 text-white hover:bg-blue-700 font-bold py-2 px-4 rounded inline-flex items-center">
+                    <router-link to="/">
+                        <span>
+                            <font-awesome-icon icon="arrow-left"></font-awesome-icon>
+                            <span>Retour à la liste des restaurants</span>
+                        </span>
+                    </router-link>
+                </button>
+            </div>
             <div class="mt-6">
                 <img
                     class="w-10/12 mx-auto rounded-lg shadow-lg"
@@ -22,7 +32,7 @@
                 </div>
             </div>
             <div v-if="restaurant.dishes.length > 0">
-                <plateMenu :dishes="restaurant.dishes"></plateMenu>
+                <plateMenu :restaurant="restaurant"></plateMenu>
             </div>
         </div>
     </div>
@@ -42,11 +52,11 @@ export default {
         };
     },
     computed: mapState({
-        restaurant: (state) => state.restaurant.restaurant,
+        restaurant: (state) => state.restaurant,
     }),
     created() {
         if (this.$route.params.id) {
-            this.$store.dispatch('restaurant/load', { id: this.$route.params.id });
+            this.$store.dispatch('loadRestaurant', { id: this.$route.params.id });
         }
     },
     methods: {
